@@ -7,44 +7,75 @@ namespace FoolService
 {
     public class Deck
     {
+        // массив из 36 карт
+        public List<int> cards = new List<int>(36);
+
+        public int trump;
+
+        // Задаем колоду карт по типу 1-"6", 2-"7", 3-"8", 4-"9", 5-"10", 6-"В", 7-"Д", 8-"К", 9-"Т"
+        // Масть задается первой цифрой двухзначного числа 1-"Буби", 2-"Крести", 3-"Пики", 4-"Червы"
         public Deck()
         {
             // записываем в колоду все карты
-            // пока сделал так, можно сделать получше через массив
-            cards.Add(new Card("Шесть крести", 6, 0));
-            cards.Add(new Card("Семь крести", 7, 0));
-            cards.Add(new Card("Восемь крести", 8, 0));
-            cards.Add(new Card("Девять крести", 9, 0));
-            cards.Add(new Card("Десять крести", 10, 0));
-        }
+            for (int i = 11; i < 19; i++)
+            {
+                cards.Add(i);
+            }
+            for (int i = 21; i < 29; i++)
+            {
+                cards.Add(i);
+            }
+            for (int i = 31; i < 39; i++)
+            {
+                cards.Add(i);
+            }
+            for (int i = 41; i < 49; i++)
+            {
+                cards.Add(i);
+            }
 
-        // массив из 36 карт
-        public List<Card> cards = new List<Card>();
+            mix();
+
+            // Выбираем козырь.
+            trump = cards[35] % 10;
+        }
 
         // ф-я перемешивания
         public void mix()
         {
-            // код перемешивания листа cards
+            Random random = new Random();
+            int n = cards.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = random.Next(n + 1);
+                int value = cards[k];
+                cards[k] = cards[n];
+                cards[n] = value;
+            }
         }
-    }
 
-    public class Card
-    {
-        public Card() { }
-        public Card(string name, int weight, int suit)
+        public bool CompareCards(int cardA, int cardB)
         {
-            this.title = name;
-            this.weight = weight;
-            this.suit = suit;
+            int A = cardA % 10;
+            int B = cardB % 10;
+            // Проверка совпадения масти
+            if (A == B)
+            {
+                if (cardA > cardB)
+                    return true;
+                return false;
+            }
+            // Если масть козырная, то прибавим ей значение
+            if (A == trump)
+                cardA += 40;
+            if (B == trump)
+                cardB += 40;
+            if (cardA > cardB)
+                return true;
+            return false;
         }
-
-        // масть: 0-крести,1-вини,2-черви,3-буби
-        public int suit;
-
-        // вес карты
-        public int weight;
-
-        // Название: "Валет, вини"
-        public string title;
     }
+
+    
 }

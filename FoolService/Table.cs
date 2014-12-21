@@ -7,22 +7,19 @@ namespace FoolService
 {
     public class Table
     {
+        Deck desk = new Deck();
+
         int max_users = 6;
         
-        // козырь
-        Card trump = new Card();
-
         // кто ходит
         User attack_user = new User();
 
         // карты на столе
-        List<Card[]> table_cards = new List<Card[]>();
-
-        Deck desk = new Deck();
+        List<int[]> table_cards = new List<int[]>();
 
         public List<User> users = new List<User>();
 
-        public bool add_user(User new_user)
+        public bool AddUser(User new_user)
         {
             if(this.users.Count < this.max_users)
             {
@@ -32,7 +29,7 @@ namespace FoolService
             return false;
         }
 
-        public void exit_user(User current_user)
+        public void ExitUser(User current_user)
         {
             foreach(var user in this.users)
             {
@@ -45,11 +42,6 @@ namespace FoolService
         // НАЧАТЬ ИГРУ
         public void PlayGame()
         {
-            //Берём колоду карт, перемешиваем её
-            desk.mix();
-
-            // козырь - первая карта
-            trump = desk.cards.First();
 
             //В цикле проходим по всем юзерам и раздаём по 6 карт
             for (int i = 0; i < 6; i++)
@@ -84,7 +76,7 @@ namespace FoolService
 
         
         // ПОШЕЛ
-        public void Go(User attack_user, Card current_card)
+        public void Go(User attack_user, int current_card)
         {
             this.attack_user = attack_user;
 
@@ -96,7 +88,7 @@ namespace FoolService
             // положили карту, которую будем крыть, на стол 
             if(table_cards.Count < 6)
             {
-                Card[] new_hod = new Card[2];
+                int[] new_hod = new int[2];
                 new_hod[1] = current_card;
 
                 table_cards.Add(new_hod);
@@ -132,7 +124,7 @@ namespace FoolService
             }
 
             // убираем карты на столе
-            table_cards = new List<Card[]>();
+            table_cards = new List<int[]>();
 
             // новый нападающий
             int attack_index = (users.LastIndexOf(take_user) + 1) % users.Count;
