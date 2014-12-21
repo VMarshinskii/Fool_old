@@ -14,19 +14,19 @@ namespace FoolService
         public List<Card> cards = new List<Card>();
 
         //команда - ходи
-        public void go()
+        public void Go()
         {
             //код команды
         }
 
         //команда - жди
-        public void wait()
+        public void Wait()
         {
             //код команды
         }
 
         //команда - отбивайся
-        public void beat()
+        public void Beat()
         {
             //код команды
         }

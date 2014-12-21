@@ -18,6 +18,8 @@ namespace FoolService
         // карты на столе
         List<Card[]> table_cards = new List<Card[]>();
 
+        Deck desk = new Deck();
+
         public List<User> users = new List<User>();
 
         public bool add_user(User new_user)
@@ -41,10 +43,9 @@ namespace FoolService
 
 
         // НАЧАТЬ ИГРУ
-        public void play_game()
+        public void PlayGame()
         {
             //Берём колоду карт, перемешиваем её
-            Deck desk = new Deck();
             desk.mix();
 
             // козырь - первая карта
@@ -67,21 +68,23 @@ namespace FoolService
 
             //Отправляем информацию юзерам
             //user - ходи
-            attack_user.go();
+            report(attack_user);
+            attack_user.Go();
 
             //остальные - ожидайте
             foreach(var user in users)
             {
                 if(user.id != attack_user.id)
                 {
-                    user.wait();
+                    report(user);
+                    user.Wait();
                 }
             }
         }
 
         
         // ПОШЕЛ
-        public void go(User attack_user, Card current_card)
+        public void Go(User attack_user, Card current_card)
         {
             this.attack_user = attack_user;
 
@@ -100,22 +103,65 @@ namespace FoolService
             }
 
             // отбивающийся
-            int beat_index = users.LastIndexOf(attack_user);
-            User beat_user = users[(beat_index + 1) % users.Count];
+            int beat_index = (users.LastIndexOf(attack_user) + 1) % users.Count;
+            User beat_user = users[beat_index];
 
-            beat_user.beat();
+            report(beat_user);
+            beat_user.Beat();
 
             foreach (var user in users)
             {
                 if (user.id != beat_user.id)
                 {
-                    user.wait();
+                    report(user);
+                    user.Wait();
                 }
             }
             
         }
 
 
+        // ВЗЯЛ
+        public void Take(User take_user)
+        {
+            foreach(var table_card in table_cards)
+            {
+                take_user.cards.Add(table_card[0]);
+                if(table_card[1] != null)
+                    take_user.cards.Add(table_card[1]);
+            }
+
+            // убираем карты на столе
+            table_cards = new List<Card[]>();
+
+            // новый нападающий
+            int attack_index = (users.LastIndexOf(take_user) + 1) % users.Count;
+            attack_user = users[attack_index];
+
+            report(attack_user);
+            attack_user.Go();
+
+            //остальные - ожидайте
+            foreach (var user in users)
+            {
+                if (user.id != attack_user.id)
+                {
+                    report(user);
+                    user.Wait();
+                }
+            }
+        }
+
+
+        // докласть карты Юзеру
+        public void report(User user)
+        {
+            while(user.cards.Count < 6 && desk.cards.Count > 0)
+            {
+                user.cards.Add(desk.cards.Last());
+                desk.cards.Remove(desk.cards.Last());
+            }
+        }
         
     }
 }
