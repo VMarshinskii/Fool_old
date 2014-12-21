@@ -1,0 +1,6 @@
+C:\Users\Вячеслав\Documents\GitHub\Fool\FoolService\bin\FoolService.dll.config
+C:\Users\Вячеслав\Documents\GitHub\Fool\FoolService\bin\FoolService.dll
+C:\Users\Вячеслав\Documents\GitHub\Fool\FoolService\bin\FoolService.pdb
+C:\Users\Вячеслав\Documents\GitHub\Fool\FoolService\obj\Debug\FoolService.csprojResolveAssemblyReference.cache
+C:\Users\Вячеслав\Documents\GitHub\Fool\FoolService\obj\Debug\FoolService.dll
+C:\Users\Вячеслав\Documents\GitHub\Fool\FoolService\obj\Debug\FoolService.pdb
