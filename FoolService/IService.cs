@@ -10,7 +10,7 @@ namespace FoolService
 {
     // ПРИМЕЧАНИЕ. Команду "Переименовать" в меню "Рефакторинг" можно использовать для одновременного изменения имени интерфейса "IService1" в коде и файле конфигурации.
     [ServiceContract]
-    public interface IPlayingCards
+    public interface IService
     {
 			
     }
