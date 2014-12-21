@@ -42,7 +42,9 @@ namespace FoolService
 				int value = deck[k];
 				deck[k] = deck[n];
 				deck[n] = value;
-			}  
+			}
+			// Выбираем козырь.
+			trump = deck[35]%10; 
 
 		}
 
@@ -59,8 +61,25 @@ namespace FoolService
 			return returnCards;
 		}
 
-		//Выбор козыря и 
-
-
+		// Сравнение карт: Карта А бьет карту В?
+		public bool CompareCards(int cardA, int cardB)
+		{
+			int A = cardA%10;
+			int B = cardB%10;
+			// Проверка совпадения масти
+			if (A == B){
+				if (cardA > cardB)
+					return true;
+				return false;
+			}
+			// Если масть козырная, то прибавим ей значение
+			if (A == trump)
+				cardA += 40;
+			if (B == trump)
+				cardB += 40;
+			if (cardA > cardB)
+				return true;
+			return false;
+		}
 	}
 }
