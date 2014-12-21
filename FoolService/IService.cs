@@ -12,7 +12,12 @@ namespace FoolService
     [ServiceContract]
     public interface IService
     {
-			
+	    [OperationContract(IsOneWay = true)]
+	    void Go();
+			[OperationContract(IsOneWay = true)]
+			void Wait();
+			[OperationContract(IsOneWay = true)]
+			void Beat();
     }
 		
 }
