@@ -5,7 +5,8 @@ using System.Web;
 
 namespace FoolService
 {
-	public class PlayingCards
+	public class PlayingCards : IPlayingCards
 	{
+
 	}
 }
