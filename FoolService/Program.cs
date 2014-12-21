@@ -11,7 +11,7 @@ namespace FoolService
 	{
 		static void Main(string[] args)
 		{
-			ServiceHost serviceHost = new ServiceHost(typeof(PlayingCards));
+			ServiceHost serviceHost = new ServiceHost(typeof(Cards));
 			serviceHost.AddServiceEndpoint(typeof(IPlayingCards), new NetTcpBinding(), "net.tcp://localhast:8875/");
 			serviceHost.Open();
 			Console.WriteLine("Service is running...");
