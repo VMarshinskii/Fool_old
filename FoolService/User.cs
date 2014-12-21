@@ -11,7 +11,24 @@ namespace FoolService
 
         public string name;
 
-        //rename on Cards type
-        public List<string> cards = new List<string>();
+        public List<Card> cards = new List<Card>();
+
+        //команда - ходи
+        public void go()
+        {
+            //код команды
+        }
+
+        //команда - жди
+        public void wait()
+        {
+            //код команды
+        }
+
+        //команда - отбивайся
+        public void beat()
+        {
+            //код команды
+        }
     }
 }
