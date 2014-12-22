@@ -5,7 +5,7 @@ using System.Web;
 
 namespace FoolService
 {
-    public class User
+    public class User : IService
     {
         public int id;
 
